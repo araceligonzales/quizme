@@ -2,7 +2,7 @@
 
 ## Description 
 
-A small timed quiz application that utilizes local storage for highscores.
+A small timed quiz application.
 
 ## Technology used 
 
