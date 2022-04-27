@@ -1,13 +1,18 @@
 //selecting elements by id
-const startBtn = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerEl = document.getElementById('question-container')
-const questionEl = document.getElementById('question')
-const answerButtonsEl = document.getElementById('answer-grid')
-var timerEl = document.getElementById('timer')
+const startBtn = document.getElementById('start-btn');
+const nextButton = document.getElementById('next-btn');
+const questionContainerEl = document.getElementById('question-container');
+const questionEl = document.getElementById('question');
+const answerButtonsEl = document.getElementById('answer-grid');
+var timerEl = document.getElementById('timer');
+//variables to make the timer 
+var timer;
+var timeLeft=60;
 
-let shuffleQuestions, currentQuestionI
 
+let shuffleQuestions, currentQuestionI;
+
+//event listeners for start button and next button
 startBtn.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
     currentQuestionI++
@@ -17,9 +22,20 @@ nextButton.addEventListener('click', () => {
 function startGame() {
     startBtn.classList.add('hide')
     questionContainerEl.classList.remove('hide')
+    timerEl.classList.remove('hide')
     shuffleQuestions = questions.sort(() => Math.random() -.5)
     currentQuestionI=0
     nextQuestion()
+    //timer init
+    
+        timer = setInterval(() => {
+            timerEl.innerHTML=timeLeft;
+            if(timeLeft === 0){
+                clearInterval(timer)
+            }
+            timeLeft--
+        }, 1000);
+        
 }
 
 function nextQuestion() {
@@ -70,7 +86,8 @@ function setstatusClass(element, correct) {
     if (correct) {
         element.classList.add('correct')
     } else {
-        element.classList.add('incorrect')
+        element.classList.add('incorrect');
+        timeLeft -=5;
     }
 }
 
